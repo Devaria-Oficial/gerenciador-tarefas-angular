@@ -9,17 +9,8 @@ import { AuthService } from '../auth/auth.service';
 })
 export class PainelComponent implements OnInit {
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
-
-  deslogar() {
-    this.authService.deslogar();
-    this.router.navigateByUrl('/login');
-  }
-
 }

@@ -1,0 +1,51 @@
+<div class="filter-container">
+    <h3>Tarefas</h3>
+
+    <img
+        class="icone-filtro"
+        src="/assets/icones/filtro.svg"
+        alt="Icone filtro"
+        (click)="toggleModal()"
+    />
+
+    <div class="filter-desktop">
+        <label>Data prevista de conclusão:</label>
+
+        <input
+            type="date"
+            class="app-input"
+            [(ngModel)]="filtro.periodoDe"
+            (change)="filtrarTarefas()"
+        />
+
+        <label>até</label>
+
+        <input
+            type="date"
+            class="app-input"
+            [(ngModel)]="filtro.periodoAte"
+            (change)="filtrarTarefas()"
+        />
+
+        <span class="divisor"></span>
+        <label>Status</label>
+
+        <select
+            class="app-input"
+            placeholder='Status'
+            [(ngModel)]="filtro.status.id"
+            (change)="filtrarTarefas()"
+        >
+            <option *ngFor="let status of listaDeStatus;" [value]="status.id">
+                {{status.nome}}
+            </option>
+        </select>
+
+        <img
+            class="icone-limpar"
+            src="/assets/icones/x-circle.svg"
+            alt="Limpar filtro"
+            (click)="limparFiltro()"
+        />
+    </div>
+</div>

@@ -1,0 +1,19 @@
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-footer',
+  templateUrl: './footer.component.html',
+  styleUrls: ['./footer.component.scss']
+})
+export class FooterComponent implements OnInit {
+
+  public anoAtual: number = new Date().getFullYear();
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+  abrirModalTarefa() {
+    console.log('abrir modal tarefa');
+  }
+}

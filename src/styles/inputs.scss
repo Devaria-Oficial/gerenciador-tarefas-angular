@@ -1,0 +1,22 @@
+.app-input {
+    font-family: $fontRegular;
+    color: $primaryColor;
+    outline: none;
+
+    &[type="date"] {
+        position: relative;
+    }
+
+    &[type="date"]::-webkit-calendar-picker-indicator {
+        width: auto;
+        height: auto;
+        position: absolute;
+        cursor: pointer;
+        color: transparent;
+        background: transparent;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+}
