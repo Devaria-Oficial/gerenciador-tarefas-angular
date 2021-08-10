@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ModoFormulario } from '../shared/enums/modo-formulario.enum';
+import { Filtro } from '../shared/models/filtro.model';
 import { Tarefa } from '../shared/models/tarefa.model';
+import { ModalTarefaConfig, ModalTarefaService } from '../shared/services/modal-tarefa.service';
+import { TarefasApiService } from '../shared/services/tarefas-api.service';
 
 @Component({
   selector: 'app-lista',
@@ -9,15 +13,21 @@ import { Tarefa } from '../shared/models/tarefa.model';
 export class ListaComponent implements OnInit {
 
   public tarefas: Tarefa[] = [];
-  constructor() { }
+  public tarefaSelecionada?: Tarefa;
+  constructor(private tarefaService: TarefasApiService, private modalTarefaService: ModalTarefaService) { }
 
   ngOnInit(): void {
-    const tarefa = new Tarefa('Teste', '2021-08-01');
-    const tarefa2 = new Tarefa('Teste', '2021-09-01');
-    tarefa2.dataConclusao = '2021-09-02';
+    this.filtrarTarefas();
 
-    this.tarefas.push(tarefa);
-    this.tarefas.push(tarefa2);
+    this.modalTarefaService.escutarEvento((config: ModalTarefaConfig) => {
+      if (config.exibir === false) {
+        this.filtrarTarefas();
+      }
+    });
+  }
+
+  async filtrarTarefas(filtro?: Filtro) {
+    this.tarefas = await this.tarefaService.listar(filtro);
   }
 
   selecionarTarefa(tarefa: Tarefa) {
@@ -25,7 +35,14 @@ export class ListaComponent implements OnInit {
       return;
     }
 
-    console.log('tarefa com id = ' + tarefa.nome + ' foi selecionada');
+    const modelTarefa = new Tarefa(tarefa.nome, tarefa.dataPrevistaConclusao);
+    modelTarefa.id = tarefa.id || (tarefa as any)._id;
+
+    this.tarefaSelecionada = tarefa;
+    this.modalTarefaService.exibirModal({
+      tarefa: modelTarefa,
+      modo: ModoFormulario.EDICAO
+    });
   }
 
   obterIconeDaTarefa(tarefa: Tarefa) {

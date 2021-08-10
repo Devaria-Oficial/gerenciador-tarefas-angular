@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalTarefaService } from '../shared/services/modal-tarefa.service';
 
 @Component({
   selector: 'app-footer',
@@ -8,12 +9,12 @@ import { Component, OnInit } from '@angular/core';
 export class FooterComponent implements OnInit {
 
   public anoAtual: number = new Date().getFullYear();
-  constructor() { }
+  constructor(private modalTarefaService: ModalTarefaService) { }
 
   ngOnInit(): void {
   }
 
   abrirModalTarefa() {
-    console.log('abrir modal tarefa');
+    this.modalTarefaService.exibirModal();
   }
 }

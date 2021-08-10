@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { StatusEnum } from '../shared/enums/status.enum';
 import { Filtro } from '../shared/models/filtro.model';
 import { Status } from '../shared/models/status.model';
@@ -10,19 +10,23 @@ import { Status } from '../shared/models/status.model';
 })
 export class FiltrosComponent implements OnInit {
 
+  public modalAberto: boolean = false;
   public filtro: Filtro = new Filtro();
   public listaDeStatus: Status[] = StatusEnum.todosStatus();
+  @Output('filtrarTarefas') filtrarTarefasEmitter: EventEmitter<Filtro> = new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
   toggleModal() {
-    console.log('toggle modal');
+    this.modalAberto = !this.modalAberto;
   }
 
   filtrarTarefas() {
-    console.log('filtrar tarefas', JSON.stringify(this.filtro));
+    this.filtrarTarefasEmitter.emit(this.filtro);
+    this.modalAberto = false;
   }
 
   limparFiltro() {

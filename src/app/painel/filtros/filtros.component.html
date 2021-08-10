@@ -49,3 +49,47 @@
         />
     </div>
 </div>
+
+<app-modal [exibir]='modalAberto'>
+    <h4 class="modal-title">
+        Filtrar tarefas
+    </h4>
+
+    <div class="form-filters">
+        <input
+            class="app-input inicio"
+            type="text"
+            placeholder="Data prevista de conclusão (inicial)"
+            [(ngModel)]="filtro.periodoDe"
+            inputDateComPlaceholder
+        />
+
+        <input
+            class="app-input final"
+            type="text"
+            placeholder="Data prevista de conclusão (final)"
+            [(ngModel)]="filtro.periodoAte"
+            inputDateComPlaceholder
+        />
+
+        <select
+            class="app-input"
+            placeholder='Status'
+            [(ngModel)]="filtro.status.id"
+        >
+            <option *ngFor="let status of listaDeStatus;" [value]="status.id">
+                {{status.nome}}
+            </option>
+        </select>
+    </div>
+
+    <div class="actions">
+        <button
+            class="btn btn-principal btn-apply-filter"
+            (click)='filtrarTarefas()'
+        >
+            Aplicar filtros
+        </button>
+        <span class="btn-secundario" (click)="toggleModal()">Cancelar</span>
+    </div>
+</app-modal>

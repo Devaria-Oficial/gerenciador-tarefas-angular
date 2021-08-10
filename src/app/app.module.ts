@@ -11,6 +11,9 @@ import { HeaderComponent } from './painel/header/header.component';
 import { FooterComponent } from './painel/footer/footer.component';
 import { FiltrosComponent } from './painel/filtros/filtros.component';
 import { ListaComponent } from './painel/lista/lista.component';
+import { ModalComponent } from './shared/components/modal/modal.component';
+import { InputDateComPlaceholderDirective } from './shared/directives/input-date-com-placeholder.directive';
+import { ModalTarefaComponent } from './painel/modal-tarefa/modal-tarefa.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { ListaComponent } from './painel/lista/lista.component';
     HeaderComponent,
     FooterComponent,
     FiltrosComponent,
-    ListaComponent
+    ListaComponent,
+    ModalComponent,
+    InputDateComPlaceholderDirective,
+    ModalTarefaComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-<app-filtros></app-filtros>
+<app-filtros (filtrarTarefas)="filtrarTarefas($event)"></app-filtros>
 <div class="container-lista" [class]="{ vazia: !tarefas?.length }" >
     <div class="cards-tarefas" *ngIf="tarefas?.length; else listaVazia">
         <div
@@ -24,7 +24,7 @@
                     }}
     
                     {{
-                        tarefa.dataConclusao || tarefa.dataPrevistaConclusao | date: 'dd/MM/yyyy'
+                        tarefa.dataConclusao || tarefa.dataPrevistaConclusao | date: 'dd/MM/yyyy' : '+3'
                     }}
                 </p>
             </div>
@@ -41,3 +41,5 @@
         </div>
     </ng-template>
 </div>
+
+<app-modal-tarefa></app-modal-tarefa>
